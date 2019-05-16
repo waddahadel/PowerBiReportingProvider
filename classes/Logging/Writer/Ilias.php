@@ -11,7 +11,7 @@ require_once 'Services/Calendar/classes/class.ilDateTime.php';
  * Class ILIAS
  * @author Michael Jansen <mjansen@databay.de>
  */
-class ILIAS extends Base
+class Ilias extends Base
 {
 	/** @var \ilLogger */
 	protected $aggregatedLogger;

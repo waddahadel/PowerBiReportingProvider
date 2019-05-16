@@ -1,0 +1,60 @@
+configuration#:#Plugin Configuration
+configuration_export#:#Export Configuration
+save#:#Save
+saving_invoked#:#Sucessful saved
+id#:#Event-ID
+id_info#:#Event-ID from Event-Queue (required).
+id_name#:#Fieldname:
+id_name_info#:#Fieldname "Event-ID" for export.
+timestamp#:#Timestamp
+timestamp_info#:#Timestamp of event (required). (I.e.: 2019-05-04T10:43:26+00:00)
+timestamp_name#:#Fieldname:
+timestamp_name_info#:#Fieldname "Timestamp" for export.
+trigger#:#Trigger
+trigger_info#:#Trigger of Events. (I.e.: progress_changed)
+trigger_name#:#Fieldname:
+trigger_name_info#:#Fieldname "Trigger" for export.
+progress#:#Learningprogress
+progress_info#:#Learningprogress of user, when the event was triggered. (I.e.: In Progress)
+progress_name#:#Fieldname:
+progress_name_info#:#Fieldname "Learningprogress" for export.
+assignment#:#Assignment
+assignment_info#:#Assignment between user and object.
+assignment_name#:#Fieldname:
+assignment_name_info#:#Fieldname "Assignment" for export.
+obj_type#:#Object type
+obj_type_info#:#Type of Object, where the event was triggered. (I.e.: tst)
+obj_type_name#:#Fieldname:
+obj_type_name_info#:#Fieldname "Object type" for export.
+obj_title#:#Object title
+obj_title_info#:#Title of Object, where the event was triggered. (I.e.: Mein Lernobject)
+obj_title_name#:#Fieldname:
+obj_title_name_info#:#Fieldname "Object title" for export.
+refid#:#Reference-ID
+refid_info#:#Reference-ID of Object, where the event was triggered. (I.e.: 125)
+refid_name#:#Fieldname:
+refid_name_info#:#Fieldname "Reference-ID" for export.
+link#:#Permanent-Link
+link_info#:#Permanent-Link of Object, where the event was triggered. (I.e.: https://...)
+link_name#:#Fieldname:
+link_name_info#:#Fieldname "Permanent-Link" for export.
+parent_title#:#Parent Course title
+parent_title_info#:#Title of parent course. (I.e.: Mein Kurs)
+parent_title_name#:#Fieldname:
+parent_title_name_info#:#Fieldname "Parent Course title" for export.
+parent_refid#:#Parent Kurs-Reference-ID
+parent_refid_info#:#Reference-ID of parent course. (I.e.: 123)
+parent_refid_name#:#Fieldname:
+parent_refid_name_info#:#Fieldname "Parent Kurs-Reference-ID" for export.
+user_mail#:#Email Address
+user_mail_info#:#Email Address from user. (I.e.: leo@lerner.de)
+user_mail_name#:#Fieldname:
+user_mail_name_info#:#Fieldname "Email Address" for export.
+user_id#:#User ID
+user_id_info#:#ID from user. (I.e.: 111)
+user_id_name#:#Fieldname:
+user_id_name_info#:#Fieldname "User ID" for export.
+user_login#:#User Login
+user_login_info#:#Login name from user. (I.e.: leo.lerner)
+user_login_name#:#Fieldname:
+user_login_name_info#:#Fieldname "User Login" for export.

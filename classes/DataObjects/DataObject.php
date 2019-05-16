@@ -132,7 +132,7 @@ abstract class DataObject implements DataObjectInterface
 	final protected function _update(array $fields, array $types, array $values, int $whereIndex)
 	{
 		$query = 'UPDATE `' . $this->use_table . '` SET ';
-		$query .= implode(' = %s,', $fields) . ' ';
+		$query .= implode(' = %s,', $fields) . ' = %s ';
 		$query .= 'WHERE ' . $this->use_index . ' = ' . $this->database->quote($whereIndex, 'integer') . ';';
 
 		$res = $this->database->manipulateF(

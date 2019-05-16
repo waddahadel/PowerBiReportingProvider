@@ -6,7 +6,7 @@ require_once("./Services/Cron/classes/class.ilCronHookPlugin.php");
 use QU\PowerBiReportingProvider\Lock\PidBasedLocker;
 use QU\PowerBiReportingProvider\Logging\Log;
 use QU\PowerBiReportingProvider\Logging\Settings as LogSettings;
-use QU\PowerBiReportingProvider\Logging\Writer\ILIAS;
+use QU\PowerBiReportingProvider\Logging\Writer\Ilias;
 use QU\PowerBiReportingProvider\Logging\Writer\Gilo;
 use QU\PowerBiReportingProvider\Logging\Writer\StdOut;
 use QU\PowerBiReportingProvider\Task\ReportingProvider;
@@ -34,44 +34,53 @@ class ilPowerBiReportingProviderPlugin extends \ilCronHookPlugin
 	{
 		self::registerAutoloader();
 
+		global $DIC;
 
-		$GLOBALS['DIC']['plugin.powbi.export.logger.writer.ilias'] = function (Pimple\Container $c) {
-			$logLevel = \ilLoggingDBSettings::getInstance()->getLevel();
+		if(!isset($DIC['plugin.powbi.export.logger.writer.ilias'])) {
+			$GLOBALS['DIC']['plugin.powbi.export.logger.writer.ilias'] = function (Pimple\Container $c) {
+				$logLevel = \ilLoggingDBSettings::getInstance()->getLevel();
 
-			return new Ilias($c['ilLog'], $logLevel);
-		};
+				return new Ilias($c['ilLog'], $logLevel);
+			};
+		}
 
-		$GLOBALS['DIC']['plugin.powbi.export.cronjob.logger'] = function (Pimple\Container $c) {
+		if(!isset($DIC['plugin.powbi.export.cronjob.logger'])) {
+			$GLOBALS['DIC']['plugin.powbi.export.cronjob.logger'] = function (Pimple\Container $c) {
 //			global $DIC;
-			$logger = new Log();
+				$logger = new Log();
 
-			$logger->addWriter(new StdOut());
-			$logger->addWriter($c['plugin.powbi.export.logger.writer.ilias']);
+				$logger->addWriter(new StdOut());
+				$logger->addWriter($c['plugin.powbi.export.logger.writer.ilias']);
 
-			$tempDirectory = \ilUtil::ilTempnam();
-			\ilUtil::makeDir($tempDirectory);
+				$tempDirectory = \ilUtil::ilTempnam();
+				\ilUtil::makeDir($tempDirectory);
 //			$DIC->filesystem()->temp()->createDir($tempDirectory);
-			$now = new \DateTimeImmutable();
-			$settings = new LogSettings($tempDirectory, 'powbi_rep_prov_' . $now->format('Y_m_d_H_i_s') . '.log');
-			$logger->addWriter(new Gilo($settings));
+				$now = new \DateTimeImmutable();
+				$settings = new LogSettings($tempDirectory, 'powbi_rep_prov_' . $now->format('Y_m_d_H_i_s') . '.log');
+				$logger->addWriter(new Gilo($settings));
 
-			return $logger;
-		};
+				return $logger;
+			};
+		}
 
-		$GLOBALS['DIC']['plugin.powbi.export.web.logger'] = function (Pimple\Container $c) {
-			$logger = new Log();
+		if(!isset($DIC['plugin.powbi.export.web.logger'])) {
+			$GLOBALS['DIC']['plugin.powbi.export.web.logger'] = function (Pimple\Container $c) {
+				$logger = new Log();
 
-			$logger->addWriter($c['plugin.powbi.export.logger.writer.ilias']);
+				$logger->addWriter($c['plugin.powbi.export.logger.writer.ilias']);
 
-			return $logger;
-		};
+				return $logger;
+			};
+		}
 
-		$GLOBALS['DIC']['plugin.powbi.cronjob.locker'] = function (Pimple\Container $c) {
-			return new PidBasedLocker(
-				new \ilSetting($this->getPluginName()),
-				$c['plugin.powbi.export.cronjob.logger']
-			);
-		};
+		if(!isset($DIC['plugin.powbi.cronjob.locker'])) {
+			$GLOBALS['DIC']['plugin.powbi.cronjob.locker'] = function (Pimple\Container $c) {
+				return new PidBasedLocker(
+					new \ilSetting($this->getPluginName()),
+					$c['plugin.powbi.export.cronjob.logger']
+				);
+			};
+		}
 
 		$this->jobs = $this->getCronJobInstances();
 	}
@@ -225,4 +234,5 @@ class ilPowerBiReportingProviderPlugin extends \ilCronHookPlugin
 
 		return parent::deactivate();
 	}
+
 }

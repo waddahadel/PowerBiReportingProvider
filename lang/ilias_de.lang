@@ -1,0 +1,60 @@
+configuration#:#Plugin Konfiguration
+configuration_export#:#Export Einstellungen
+save#:#Speichern
+saving_invoked#:#Speichern erfolgreich
+id#:#Ereignis-ID
+id_info#:#Ereignis-ID des Event-Queue Eintrags (verpflichtend).
+id_name#:#Feldname:
+id_name_info#:#Feldname "Ereignis-ID" für den Export.
+timestamp#:#Zeitstempel
+timestamp_info#:#Zeitstempel des Events (verpflichtend). (Bsp.: 2019-05-04T10:43:26+00:00)
+timestamp_name#:#Feldname:
+timestamp_name_info#:#Feldname "Zeitstempel" für den Export.
+trigger#:#Auslöser
+trigger_info#:#Auslöser des Events. (Bsp.: progress_changed)
+trigger_name#:#Feldname:
+trigger_name_info#:#Feldname "Auslöser" für den Export.
+progress#:#Lernfortschritt
+progress_info#:#Lernfortschritt des Nutzers, zum Zeitpunkt des Events. (Bsp.: In Progress)
+progress_name#:#Feldname:
+progress_name_info#:#Feldname "Lernfortschritt" für den Export.
+assignment#:#Zuweisung
+assignment_info#:#Zuweisung zwischen Objekt und Nutzer
+assignment_name#:#Feldname:
+assignment_name_info#:#Feldname "Zuweisung" für den Export.
+obj_type#:#Objekttyp
+obj_type_info#:#Typ des Objekts, an dem das Event ausgelöst wurde. (Bsp.: tst)
+obj_type_name#:#Feldname:
+obj_type_name_info#:#Feldname "Objekttyp" für den Export.
+obj_title#:#Objekttitel
+obj_title_info#:#Titel des Objekts, an dem das Event ausgelöst wurde. (Bsp.: Mein Lernobjekt)
+obj_title_name#:#Feldname:
+obj_title_name_info#:#Feldname "Objekttitel" für den Export.
+refid#:#Referenz-ID
+refid_info#:#Referenz-ID des Objekts, an dem das Event ausgelöst wurde. (Bsp.: 125)
+refid_name#:#Feldname:
+refid_name_info#:#Feldname "Referenz-ID" für den Export.
+link#:#Permanent-Link
+link_info#:#Permanent-Link des Objekts, an dem das Event ausgelöst wurde. (Bsp.: https://...)
+link_name#:#Feldname:
+link_name_info#:#Feldname "Permanent-Link" für den Export.
+parent_title#:#Parent Kurstitel
+parent_title_info#:#Titel des übergeordneten Kurses. (Bsp.: Mein Kurs)
+parent_title_name#:#Feldname:
+parent_title_name_info#:#Feldname "Parent Kurstitel" für den Export.
+parent_refid#:#Parent Kurs-Referenz-ID
+parent_refid_info#:#Referenz-ID des übergeordneten Kurses. (Bsp.: 123)
+parent_refid_name#:#Feldname:
+parent_refid_name_info#:#Feldname "Parent Kurs-Referenz-ID" für den Export.
+user_mail#:#E-Mail-Adresse
+user_mail_info#:#E-Mail-Adresse des Nutzers, der das Event ausgelöst hat. (Bsp.: leo@lerner.de)
+user_mail_name#:#Feldname:
+user_mail_name_info#:#Feldname "E-Mail-Adresse" für den Export.
+user_id#:#User ID
+user_id_info#:#ID des Nutzers, der das Event ausgelöst hat. (Bsp.: 111)
+user_id_name#:#Feldname:
+user_id_name_info#:#Feldname "User ID" für den Export.
+user_login#:#User Login
+user_login_info#:#Login-Name des Nutzers, der das Event ausgelöst hat. (Bsp.: leo.lerner)
+user_login_name#:#Feldname:
+user_login_name_info#:#Feldname "User Login" für den Export.

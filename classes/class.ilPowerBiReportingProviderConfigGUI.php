@@ -3,6 +3,8 @@
 
 include_once("./Services/Component/classes/class.ilPluginConfigGUI.php");
 
+use \QU\PowerBiReportingProvider\DataObjects\TrackingOptions;
+
 class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 {
 	/** @var ilPowerBiReportingProviderPlugin */
@@ -81,9 +83,30 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 	public function getConfigurationForm()
 	{
 		$form = new ilPropertyFormGUI();
-		$form->setTitle($this->plugin->txt('configuration'));
+		$form->setTitle($this->plugin->txt('configuration_export'));
 
-		// @Todo
+		$trackingOptions = new TrackingOptions();
+		$trackingOptions->load();
+		foreach ($trackingOptions->getAvailableOptions() as $keyword) {
+			$option = $trackingOptions->getOptionByKeyword($keyword);
+			if (isset($option)) {
+				$cb = new ilCheckboxInputGUI($this->plugin->txt($keyword), $keyword);
+				$cb->setInfo($this->plugin->txt($keyword . '_info'));
+				$cb->setChecked($option->isActive());
+				if (in_array($keyword, ['id', 'timestamp'])) {
+					$cb->setDisabled(true);
+				}
+				$sub_ti = new ilTextInputGUI($this->plugin->txt($keyword . '_name'), $keyword . '_name');
+				$sub_ti->setInfo($keyword . '_name_info');
+				$sub_ti->setValue($option->getFieldName());
+
+				$cb->addSubItem($sub_ti);
+				$form->addItem($cb);
+
+				unset($sub_ti);
+				unset($cb);
+			}
+		}
 
 		$form->addCommandButton("save", $this->plugin->txt("save"));
 		$form->setFormAction($this->ctrl->getFormAction($this));
@@ -91,22 +114,29 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 		return $form;
 	}
 
-	public function saveCmd() // @Todo
+	public function saveCmd()
 	{
 		$form = $this->getConfigurationForm();
-//		$settings = new \QU\LERQ\Model\SettingsModel();
+		$trackingOptions = new TrackingOptions();
+		$trackingOptions->load();
 
 		if ($form->checkInput()) {
 			// save...
-			/** @var \QU\LERQ\Model\SettingsItemModel $setting */
-//			foreach ($settings->getAll() as $keyword => $setting) {
-//				if ($form->getInput($keyword)) {
-//					$settings->__set($keyword, $form->getInput($keyword));
-//				} else {
-//					$settings->__set($keyword, false);
-//				}
-//			}
-//			$settings->save();
+			foreach ($trackingOptions->getAvailableOptions() as $keyword) {
+				$opt = $trackingOptions->getOptionByKeyword($keyword);
+				if ($form->getInput($keyword)) {
+					$opt->setActive(true);
+				} else {
+					if (!in_array($keyword, ['id', 'timestamp'])) {
+						$opt->setActive(false);
+					}
+				}
+				if ($form->getInput($keyword . '_name')) {
+					$opt->setFieldName(($form->getInput($keyword . '_name')));
+				}
+				$opt->save();
+				unset($opt);
+			}
 
 			ilUtil::sendSuccess($this->plugin->txt("saving_invoked"), true);
 			$this->ctrl->redirect($this, "configure");
@@ -122,8 +152,7 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 	 */
 	public function getTabs(): array
 	{
-		return [
-		];
+		return [];
 	}
 
 	/**
