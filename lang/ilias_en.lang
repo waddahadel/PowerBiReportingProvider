@@ -1,13 +1,22 @@
 configuration#:#Plugin Configuration
 configuration_export#:#Export Configuration
+config_export_desc#:#To ensure a complete export, make sure that the <a href="%s" target="_blank">LpEventReportQueue</a> plugin is enabled and configured correctly.
 save#:#Save
 saving_invoked#:#Sucessful saved
+cronjob_title#:#PowerBi Export
+cronjob_description#:#If activated, the cronjob will create export files of the lp queue.
+export_path#:#Export path
+export_path_info#:#File system path to the export directory.
+export_filename#:#Export filename
+export_filename_info#:#Name for the export file. Placeholder for PHP date formats are possible in squqare brackets []. (I.e. [Y.m.d-H:i:s])
+export_limit#:#Export limit
+export_limit_info#:#Count max entries per export. The value zero (0) disables the limitation.
 id#:#Event-ID
-id_info#:#Event-ID from Event-Queue (required).
+id_info#:#(required) Event-ID from Event-Queue.
 id_name#:#Fieldname:
 id_name_info#:#Fieldname "Event-ID" for export.
 timestamp#:#Timestamp
-timestamp_info#:#Timestamp of event (required). (I.e.: 2019-05-04T10:43:26+00:00)
+timestamp_info#:#(required) Timestamp of event. (I.e.: 2019-05-04T10:43:26+00:00)
 timestamp_name#:#Fieldname:
 timestamp_name_info#:#Fieldname "Timestamp" for export.
 trigger#:#Trigger

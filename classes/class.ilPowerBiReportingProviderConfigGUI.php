@@ -85,6 +85,56 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 		$form = new ilPropertyFormGUI();
 		$form->setTitle($this->plugin->txt('configuration_export'));
 
+		$target_plugin_id = 'lpeventreportqueue';
+		$target_plugin_name = 'lpeventreportqueue';
+		if (\ilPluginAdmin::isPluginActive($target_plugin_id) != false) {
+			$link = $this->ctrl->getLinkTargetByClass([
+				\ilObjComponentSettingsGUI::class
+			], 'showPlugin', false, false, false);
+
+			if (preg_match('/plugin_id=([^&]+)/i', $link) > 0) {
+				$link = preg_replace_callback('/plugin_id=([^&]+)/i', function (array $matches) use ($target_plugin_id) {
+					return 'plugin_id=' . $target_plugin_id;
+				}, $link);
+
+			} else {
+				$link .= '&plugin_id=' . $target_plugin_id;
+			}
+
+			if (preg_match('/pname=([^&]+)/i', $link) > 0) {
+				$link = preg_replace_callback('/pname=([^&]+)/i', function (array $matches) use ($target_plugin_name) {
+					return 'pname=' . $target_plugin_name;
+				}, $link);
+
+			} else {
+				$link .= 'pname=' . $target_plugin_name;
+			}
+
+		} else {
+			$link="#";
+		}
+
+		$form->setDescription(
+			sprintf($this->plugin->txt('config_export_desc'), $link)
+		);
+
+		$ti = new \ilTextInputGUI($this->plugin->txt('export_path'), 'export_path');
+		$ti->setInfo($this->plugin->txt('export_path_info'));
+		$ti->setValue($this->settings->get('export_path', '/tmp'));
+		$form->addItem($ti);
+
+		$ti = new \ilTextInputGUI($this->plugin->txt('export_filename'), 'export_filename');
+		$ti->setInfo($this->plugin->txt('export_filename_info'));
+		$ti->setValue($this->settings->get('export_filename', '[Y-m-d]_powbi_export'));
+		$form->addItem($ti);
+
+		$ni = new \ilNumberInputGUI($this->plugin->txt('export_limit'), 'export_limit');
+		$ni->setInfo($this->plugin->txt('export_limit_info'));
+		$ni->setValue($this->settings->get('export_limit', 0));
+		$ni->setMinValue(0);
+		$ni->setMaxValue(999);
+		$form->addItem($ni);
+
 		$trackingOptions = new TrackingOptions();
 		$trackingOptions->load();
 		foreach ($trackingOptions->getAvailableOptions() as $keyword) {
@@ -97,7 +147,7 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 					$cb->setDisabled(true);
 				}
 				$sub_ti = new ilTextInputGUI($this->plugin->txt($keyword . '_name'), $keyword . '_name');
-				$sub_ti->setInfo($keyword . '_name_info');
+				$sub_ti->setInfo($this->plugin->txt($keyword . '_name_info'));
 				$sub_ti->setValue($option->getFieldName());
 
 				$cb->addSubItem($sub_ti);
@@ -136,6 +186,18 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 				}
 				$opt->save();
 				unset($opt);
+			}
+
+			if ($form->getInput('export_path')) {
+				$this->settings->set('export_path', $form->getInput('export_path'));
+			}
+
+			if ($form->getInput('export_filename')) {
+				$this->settings->set('export_filename', $form->getInput('export_filename'));
+			}
+
+			if ($form->getInput('export_limit') || $form->getInput('export_limit') === '0') {
+				$this->settings->set('export_limit', $form->getInput('export_limit'));
 			}
 
 			ilUtil::sendSuccess($this->plugin->txt("saving_invoked"), true);

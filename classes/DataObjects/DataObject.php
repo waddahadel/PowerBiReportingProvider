@@ -108,8 +108,8 @@ abstract class DataObject implements DataObjectInterface
 	final protected function _create(array $fields, array $types, array $values)
 	{
 		$query = 'INSERT INTO `' . $this->use_table . '` ';
-		$query .= '(' . implode(', ', $fields) . ') ';
-		$query .= 'VALUES (' . implode(',', array_fill(0, count($fields), '%s')) . ') ';
+		$query .= '(`' . implode('`, `', $fields) . '`) ';
+		$query .= 'VALUES (' . implode(', ', array_fill(0, count($fields), '%s')) . ') ';
 
 		$res = $this->database->manipulateF(
 			$query,
