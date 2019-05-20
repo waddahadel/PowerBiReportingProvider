@@ -11,6 +11,11 @@ use QU\PowerBiReportingProvider\FileWriter\CsvWriter;
 use QU\PowerBiReportingProvider\Lock\Locker;
 use QU\PowerBiReportingProvider\Logging\Logger;
 
+/**
+ * Class ReportingProvider
+ * @package QU\PowerBiReportingProvider\Task
+ * @author Ralph Dittrich <dittrich@qualitus.de>
+ */
 class ReportingProvider extends BaseTask
 {
 	const JOB_NAME = 'POWBI_REPORTING_PROVIDER';
@@ -118,6 +123,15 @@ class ReportingProvider extends BaseTask
 		$result = new \ilCronJobResult();
 		$result->setStatus(\ilCronJobResult::STATUS_OK);
 
+		if (false === \ilPluginAdmin::isPluginActive('lpeventreportqueue')) {
+			$this->logger->info('Plugin LpEventReportQueue is not available or not active.');
+			$result->setStatus(\ilCronJobResult::STATUS_FAIL);
+			$result->setMessage('Plugin LpEventReportQueue is not available or not active.');
+
+			$this->logger->shutdown();
+
+			return $result;
+		}
 		\ilPluginAdmin::getPluginObject(
 			'Services',
 			'Cron',

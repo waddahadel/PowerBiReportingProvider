@@ -5,6 +5,10 @@ include_once("./Services/Component/classes/class.ilPluginConfigGUI.php");
 
 use \QU\PowerBiReportingProvider\DataObjects\TrackingOptions;
 
+/**
+ * Class ilPowerBiReportingProviderConfigGUI
+ * @author Ralph Dittrich <dittrich@qualitus.de>
+ */
 class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 {
 	/** @var ilPowerBiReportingProviderPlugin */
@@ -49,6 +53,10 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 		}
 	}
 
+	/**
+	 * @param $cmd
+	 * @return void
+	 */
 	function performCommand($cmd)
 	{
 		$this->construct();
@@ -80,6 +88,9 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 		$this->tpl->setContent($form->getHTML());
 	}
 
+	/**
+	 * @return ilPropertyFormGUI
+	 */
 	public function getConfigurationForm()
 	{
 		$form = new ilPropertyFormGUI();
@@ -164,6 +175,9 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 		return $form;
 	}
 
+	/**
+	 * @return void
+	 */
 	public function saveCmd()
 	{
 		$form = $this->getConfigurationForm();

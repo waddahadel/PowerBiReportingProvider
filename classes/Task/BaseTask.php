@@ -5,6 +5,11 @@ namespace QU\PowerBiReportingProvider\Task;
 
 require_once 'Services/Cron/classes/class.ilCronJob.php';
 
+/**
+ * Class BaseTask
+ * @package QU\PowerBiReportingProvider\Task
+ * @author Ralph Dittrich <dittrich@qualitus.de>
+ */
 abstract class BaseTask extends \ilCronJob
 {
 	/**

@@ -50,7 +50,7 @@ class PidBasedLocker implements Locker
 	}
 
 	/**
-	 *
+	 * @return void
 	 */
 	protected function writeLockedState()
 	{

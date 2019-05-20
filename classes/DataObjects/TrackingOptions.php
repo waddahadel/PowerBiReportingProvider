@@ -5,6 +5,11 @@ namespace QU\PowerBiReportingProvider\DataObjects;
 
 use QU\PowerBiReportingProvider\DataObjects\TrackingOption;
 
+/**
+ * Class TrackingOptions
+ * @package QU\PowerBiReportingProvider\DataObjects
+ * @author Ralph Dittrich <dittrich@qualitus.de>
+ */
 class TrackingOptions
 {
 	/** @var TrackingOption */
@@ -368,6 +373,7 @@ class TrackingOptions
 			'user_login',
 		];
 	}
+
 	/**
 	 * @return array
 	 */

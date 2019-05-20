@@ -230,6 +230,9 @@ class ilPowerBiReportingProviderPlugin extends \ilCronHookPlugin
 		}
 	}
 
+	/**
+	 * @return bool
+	 */
 	protected function beforeUninstall() {
 
 		return parent::deactivate();

@@ -15,6 +15,10 @@ use QU\LERQ\Model\QueueModel;
 class Report
 {
 
+	/**
+	 * @param array $params
+	 * @return array
+	 */
 	public function getFilteredEvents(array $params)
 	{
 		global $DIC;
@@ -33,23 +37,22 @@ class Report
 		$filter = $this->createFilterObject($API, $params);
 
 		/** @var \QU\LERQ\Model\QueueModel[] $results */
-//		$results = $API->getCollection($filter)->getAllItems();
-//		$data = [];
-//		foreach ($results as $key => $value){
 		foreach ($API->getCollection($filter) as $value) {
 			$value->setTimestamp($this->convertToISO8601($value->getTimestamp()));
 			$value->setCourseStart($this->convertToISO8601($value->getCourseStart()));
 			$value->setCourseEnd($this->convertToISO8601($value->getCourseEnd()));
-//			$data[] = json_decode((string)$value);
 			$data[] = $value;
 		}
 		return [
 			'data' => $data,
-//			'pagination' => $this->generatePagination($filter, $results), // @todo ?
 		];
 	}
 
-
+	/**
+	 * @param API $API
+	 * @param array $params
+	 * @return FilterObject
+	 */
 	private function createFilterObject(API $API, array $params): FilterObject
 	{
 		/** @var FilterObject $filter */
