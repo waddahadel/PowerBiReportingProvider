@@ -187,8 +187,14 @@ class ReportingProvider extends BaseTask
 
 			$this->logger->info('Trying to get filtered event data');
 			$events = $report->getFilteredEvents($filter_params);
-			if (!empty($events)) {
-				$this->logger->info('Found data for ' . count($events) . ' events.');
+			if (!empty($events) && !empty($events['data'])) {
+				$this->logger->info('Found data for ' . count($events['data']) . ' events.');
+
+//				$this->logger->debug('DEBUG START');
+//				$fk = array_key_first($events['data']);
+//				$this->logger->debug(gettype($events['data'][89]));
+//				$this->logger->debug($events['data'][89]);
+//				$this->logger->debug('DEBUG END');
 
 				$this->logger->info('Preparing CSV headers');
 				// collect export fields
@@ -377,8 +383,8 @@ class ReportingProvider extends BaseTask
 		}
 
 
-		$this->logger->debug(var_export($fieldnames, true));
-		$this->logger->debug(var_export($prepared, true));
+//		$this->logger->debug(var_export($fieldnames, true));
+//		$this->logger->debug(var_export($prepared, true));
 
 		return $prepared;
 	}

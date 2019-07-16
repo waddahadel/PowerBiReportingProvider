@@ -135,7 +135,7 @@ class CsvWriter
 			}
 		}
 
-		$this->buffer = @fopen($this->file_path, 'x');
+		$this->buffer = @fopen($this->file_path, 'a');
 		if (!is_resource($this->buffer) || $this->buffer === false) {
 			throw new \Exception('Cannot create file for writing.');
 		}

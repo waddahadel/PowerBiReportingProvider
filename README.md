@@ -8,7 +8,7 @@
 * [Dependencies](#dependencies)
 * [TroubleShooting](#troubleshooting)
 
-## Installation:
+## Installation
 
 1. Clone from git or download and extract zip file
 2. Rename folder to <b>PowerBiReportingProvider</b>
