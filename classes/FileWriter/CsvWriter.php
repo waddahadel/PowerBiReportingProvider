@@ -127,7 +127,9 @@ class CsvWriter
 		$filename = substr($this->file_path, ($fnpos + 1));
 
 		if (file_exists($this->file_path)) {
-			throw new \Exception('File (' . $filename . ') already exists at ' . $dir_path . '.');
+//			throw new \Exception('File (' . $filename . ') already exists at ' . $dir_path . '.');
+			global $DIC;
+			$DIC->logger()->root()->debug('Writing to existing file: ' . $this->file_path);
 		}
 		if (!is_dir($dir_path)) {
 			if (false === mkdir($dir_path, 0755, true)) {
