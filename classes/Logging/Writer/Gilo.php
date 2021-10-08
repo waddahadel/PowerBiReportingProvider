@@ -47,9 +47,16 @@ class Gilo extends Base
 			);
 
 			if (class_exists('\ilGenericInterfaceLogOverviewPlugin') && $plugin instanceof \ilGenericInterfaceLogOverviewPlugin) {
+                $coreLoggingFactory = \ilLoggerFactory::getInstance();
 
 				$factory = \ilLoggerFactory::newInstance($settings);
 				$this->aggregatedLogger = $factory->getComponentLogger('PowerBiReportingProvider');
+
+                $loggerFactoryRefl = new \ReflectionClass(\ilLoggerFactory::class);
+                $loggerFactoryInstance = $loggerFactoryRefl->getProperty('instance');
+                $loggerFactoryInstance->setAccessible(true);
+                $loggerFactoryInstance->setValue($coreLoggingFactory);
+
 				$this->aggregatedLogger->getLogger()->popProcessor();
 				$this->aggregatedLogger->getLogger()->pushProcessor(new TraceProcessor(\ilLogLevel::DEBUG));
 
