@@ -36,9 +36,8 @@ class Report
 
 		$filter = $this->createFilterObject($API, $params);
 
-		/** @var \QU\LERQ\Model\QueueModel[] $results */
+		/** @var \QU\LERQ\Model\QueueModel $value */
 		foreach ($API->getCollection($filter) as $value) {
-			$value->setTimestamp($this->convertToISO8601($value->getTimestamp()));
 			$value->setCourseStart($this->convertToISO8601($value->getCourseStart()));
 			$value->setCourseEnd($this->convertToISO8601($value->getCourseEnd()));
 			$data[] = $value;
