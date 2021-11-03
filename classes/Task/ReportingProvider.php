@@ -285,7 +285,13 @@ class ReportingProvider extends BaseTask
 		foreach ($data as $queueItem) {
 			$set = [];
 			$set[$fieldnames['id']] = $queueItem->getId();
-			$set[$fieldnames['timestamp']] = $queueItem->getTimestamp();
+			$set[$fieldnames['timestamp']] = '';
+            if (is_numeric($queueItem->getTimestamp())) {
+                $dt = new \Datetime();
+                $dt->setTimestamp($queueItem->getTimestamp());
+                $dt->setTimezone(new \DateTimeZone('UTC'));
+                $set[$fieldnames['timestamp']] = $dt->format('c');
+            }
 
 			if (array_key_exists('trigger', $fieldnames)) {
 				if ($first) {
