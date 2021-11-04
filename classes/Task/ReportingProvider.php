@@ -177,7 +177,9 @@ class ReportingProvider extends BaseTask
 			];
 			if ($export_limit > 0) {
 				$filter_params['limit'] = $export_limit;
-			}
+			} else {
+                $filter_params['limit'] = -1;
+            }
 
 			$this->logger->info('Collecting Settings and Options');
 			// get queue collection and prepare data for csv
