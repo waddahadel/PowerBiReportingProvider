@@ -169,6 +169,10 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 			}
 		}
 
+		$ignoreNotAttempted = new ilCheckboxInputGUI($this->plugin->txt('ignoreNotAttempted'), 'ignoreNotAttempted');
+		$ignoreNotAttempted->setChecked((bool) $this->settings->get('ignoreNotAttempted', ''));
+		$form->addItem($ignoreNotAttempted);
+
 		$form->addCommandButton("save", $this->plugin->txt("save"));
 		$form->setFormAction($this->ctrl->getFormAction($this));
 
@@ -213,6 +217,8 @@ class ilPowerBiReportingProviderConfigGUI extends ilPluginConfigGUI
 			if ($form->getInput('export_limit') || $form->getInput('export_limit') === '0') {
 				$this->settings->set('export_limit', $form->getInput('export_limit'));
 			}
+
+			$this->settings->set('ignoreNotAttempted', (string) $form->getInput('ignoreNotAttempted'));
 
 			ilUtil::sendSuccess($this->plugin->txt("saving_invoked"), true);
 			$this->ctrl->redirect($this, "configure");

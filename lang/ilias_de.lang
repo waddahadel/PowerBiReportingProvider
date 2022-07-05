@@ -67,3 +67,4 @@ user_login#:#User Login
 user_login_info#:#Login-Name des Nutzers, der das Event ausgelöst hat. (Bsp.: leo.lerner)
 user_login_name#:#Feldname:
 user_login_name_info#:#Feldname "User Login" für den Export.
+ignoreNotAttempted#:#Lernfortschrittsevents mit Status not attempted auslassen
