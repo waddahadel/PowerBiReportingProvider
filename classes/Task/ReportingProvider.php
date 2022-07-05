@@ -181,6 +181,10 @@ class ReportingProvider extends BaseTask
                 $filter_params['limit'] = -1;
             }
 
+            if ($this->settings->get('ignoreNotAttempted', '')) {
+                $filter_params['progress'] = 'not_attempted';
+            }
+
 			$this->logger->info('Collecting Settings and Options');
 			// get queue collection and prepare data for csv
 			$trackingOptions = new TrackingOptions();
