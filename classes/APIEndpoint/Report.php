@@ -68,6 +68,9 @@ class Report
 		if(isset($params['course_after'])){
 			$filter->setCourseStart($this->convertFromISO8601($params['course_after']));
 		}
+		if(isset($params['excluded_progress'])){
+			$filter->setExcludedProgress($params['excluded_progress']);
+		}
 		if(isset($params['progress'])){
 			$filter->setProgress($params['progress']);
 		}
