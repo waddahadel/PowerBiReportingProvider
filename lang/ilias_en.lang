@@ -67,4 +67,4 @@ user_login#:#User Login
 user_login_info#:#Login name from user. (I.e.: leo.lerner)
 user_login_name#:#Fieldname:
 user_login_name_info#:#Fieldname "User Login" for export.
-ignoreNotAttempted#:#Lernfortschrittsevents mit Status not attempted auslassen
+ignoreNotAttempted#:#Ignore Learning Progress Event with Status not attempted
