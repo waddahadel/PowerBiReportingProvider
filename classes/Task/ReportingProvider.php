@@ -181,7 +181,7 @@ class ReportingProvider extends BaseTask
                 $filter_params['limit'] = -1;
             }
 
-            if ($this->settings->get('ignoreNotAttempted', '')) {
+            if ($this->settings->get('ignoreNotAttempted_' . $this->plugin->getId(), '0')) {
                 $filter_params['excluded_progress'] = 'no_attempted';
             }
 
